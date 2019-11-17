@@ -1,0 +1,83 @@
+{
+	"format_version": 1,
+	"imports": [
+		{
+			"target_table": "FIORI_PURCHASEDOCUMENTSCP_PURCHASEDOCUMENT",
+			"source_data": {
+			"data_type": "CSV",
+				"file_name": "PurchaseDocument.csv",
+				"has_header": true
+			},
+			"import_settings": {
+			"import_columns": [
+					"PURCHASEDOCUMENT",
+					"DESCRIPTION",
+					"STATUS",
+					"PURCHASINGORGANIZATION",
+					"PURCHASEDOCPRIORITY_CODE"
+				]
+			}
+		},
+		{
+			"target_table": "FIORI_PURCHASEDOCUMENTSCP_PURCHASEDOCUMENTITEMS",
+			"source_data": {
+			"data_type": "CSV",
+				"file_name": "PurchaseDocumentItems.csv",
+				"has_header": true
+			},
+			"import_settings": {
+			"import_columns": [
+					"PURCHASEDOCUMENT_PURCHASEDOCUMENT",
+					"PURCHASEDOCUMENTITEM",
+					"DESCRIPTION",
+					"PRICE",
+					"CURRENCY",
+					"QUANTITY",
+					"QUANTITYUNIT_CODE"
+				]
+			}
+		},
+		{
+			"target_table": "FIORI_PURCHASEDOCUMENTSCP_CURRENCIES",
+			"source_data": {
+				"data_type": "CSV",
+				"file_name": "Currencies.csv",
+				"has_header": true
+			},
+			"import_settings": {
+				"import_columns": [
+					"CODE",
+					"NAME"
+				]
+			}
+		},
+		{
+			"target_table": "FIORI_PURCHASEDOCUMENTSCP_QUANTITYUNITS",
+			"source_data": {
+				"data_type": "CSV",
+				"file_name": "QuantityUnits.csv",
+				"has_header": true
+			},
+			"import_settings": {
+				"import_columns": [
+					"CODE",
+					"NAME"
+				]
+			}
+		},
+		{
+			"target_table": "FIORI_PURCHASEDOCUMENTSCP_PRIORITIES",
+			"source_data": {
+				"data_type": "CSV",
+				"file_name": "Priorities.csv",
+				"has_header": true
+			},
+			"import_settings": {
+				"import_columns": [
+					"CODE",
+					"NAME"
+				]
+			}
+		}
+	]
+}

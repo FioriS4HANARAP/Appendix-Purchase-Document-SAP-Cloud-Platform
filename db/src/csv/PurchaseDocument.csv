@@ -1,0 +1,4 @@
+,PURCHASEDOCUMENT,DESCRIPTION,STATUS,PURCHASINGORGANIZATION,PURCHASEDOCPRIORITY_CODE
+1,110,Company Car Purchase,Created,PurchasingOrg1,1
+2,210,Hardware Purchase,Approved,PurchasingOrg2,2
+3,310,Book Purchase,Created,PurchasingOrg3,2

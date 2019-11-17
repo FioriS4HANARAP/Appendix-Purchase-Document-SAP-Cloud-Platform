@@ -1,0 +1,61 @@
+[{
+	"PurchaseDocument": 110,
+	"description": "Company Car Purchase",
+	"status": "Created",
+	"purchasingOrganization": "PurchasingOrg1",
+	"PurchaseDocPriority_code": "1",
+	"__metadata": {
+		"uri": "PurchaseDocument(9)",
+		"type": "PurchaseService.PurchaseDocument"
+	},
+	"PurchaseDocPriority": {
+		"__deferred": {
+			"uri": "PurchaseDocument(9)/PurchaseDocPriority"
+		}
+	},
+	"PurchaseDocumentItem": {
+		"__deferred": {
+			"uri": "PurchaseDocument(9)/PurchaseDocumentItem"
+		}
+	}
+}, {
+	"PurchaseDocument": 210,
+	"description": "Hardware Purchase",
+	"status": "Approved",
+	"purchasingOrganization": "PurchasingOrg2",
+	"PurchaseDocPriority_code": "2",
+	"__metadata": {
+		"uri": "PurchaseDocument(416)",
+		"type": "PurchaseService.PurchaseDocument"
+	},
+	"PurchaseDocPriority": {
+		"__deferred": {
+			"uri": "PurchaseDocument(416)/PurchaseDocPriority"
+		}
+	},
+	"PurchaseDocumentItem": {
+		"__deferred": {
+			"uri": "PurchaseDocument(416)/PurchaseDocumentItem"
+		}
+	}
+}, {
+	"PurchaseDocument": 310,
+	"description": "Book Purchase",
+	"status": "Created",
+	"purchasingOrganization": "PurchasingOrg3",
+	"PurchaseDocPriority_code": "2",
+	"__metadata": {
+		"uri": "PurchaseDocument(6671)",
+		"type": "PurchaseService.PurchaseDocument"
+	},
+	"PurchaseDocPriority": {
+		"__deferred": {
+			"uri": "PurchaseDocument(6671)/PurchaseDocPriority"
+		}
+	},
+	"PurchaseDocumentItem": {
+		"__deferred": {
+			"uri": "PurchaseDocument(6671)/PurchaseDocumentItem"
+		}
+	}
+}]

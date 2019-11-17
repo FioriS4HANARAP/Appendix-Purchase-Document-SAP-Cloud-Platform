@@ -1,0 +1,121 @@
+[{
+	"PurchaseDocumentItem": 2,
+	"description": "Screen",
+	"price": 200,
+	"currency": "EUR",
+	"quantity": 2,
+	"PurchaseDocument_PurchaseDocument": 210,
+	"QuantityUnit_code": "PC",
+	"__metadata": {
+		"uri": "PurchaseDocumentItems(PurchaseDocumentItem=6043,PurchaseDocument_PurchaseDocument=9)",
+		"type": "PurchaseService.PurchaseDocumentItems"
+	},
+	"PurchaseDocument": {
+		"__deferred": {
+			"uri": "PurchaseDocumentItems(PurchaseDocumentItem=6043,PurchaseDocument_PurchaseDocument=9)/PurchaseDocument"
+		}
+	},
+	"QuantityUnit": {
+		"__deferred": {
+			"uri": "PurchaseDocumentItems(PurchaseDocumentItem=6043,PurchaseDocument_PurchaseDocument=9)/QuantityUnit"
+		}
+	}
+}, {
+	"PurchaseDocumentItem": 1,
+	"description": "SAP Press Fiori",
+	"price": 50,
+	"currency": "EUR",
+	"quantity": 1,
+	"PurchaseDocument_PurchaseDocument": 310,
+	"QuantityUnit_code": "PC",
+	"__metadata": {
+		"uri": "PurchaseDocumentItems(PurchaseDocumentItem=5449,PurchaseDocument_PurchaseDocument=416)",
+		"type": "PurchaseService.PurchaseDocumentItems"
+	},
+	"PurchaseDocument": {
+		"__deferred": {
+			"uri": "PurchaseDocumentItems(PurchaseDocumentItem=5449,PurchaseDocument_PurchaseDocument=416)/PurchaseDocument"
+		}
+	},
+	"QuantityUnit": {
+		"__deferred": {
+			"uri": "PurchaseDocumentItems(PurchaseDocumentItem=5449,PurchaseDocument_PurchaseDocument=416)/QuantityUnit"
+		}
+	}
+}, {
+	"PurchaseDocumentItem": 1,
+	"description": "Computer",
+	"price": 500,
+	"currency": "EUR",
+	"quantity": 1,
+	"PurchaseDocument_PurchaseDocument": 210,
+	"QuantityUnit_code": "PC",
+	"__metadata": {
+		"uri": "PurchaseDocumentItems(PurchaseDocumentItem=8419,PurchaseDocument_PurchaseDocument=100)",
+		"type": "PurchaseService.PurchaseDocumentItems"
+	},
+	"PurchaseDocument": {
+		"__deferred": {
+			"uri": "PurchaseDocumentItems(PurchaseDocumentItem=8419,PurchaseDocument_PurchaseDocument=100)/PurchaseDocument"
+		}
+	},
+	"QuantityUnit": {
+		"__deferred": {
+			"uri": "PurchaseDocumentItems(PurchaseDocumentItem=8419,PurchaseDocument_PurchaseDocument=100)/QuantityUnit"
+		}
+	}
+}, {
+	"PurchaseDocumentItem": 2,
+	"description": "Tires",
+	"price": 1200,
+	"currency": "EUR",
+	"quantity": 4,
+	"PurchaseDocument_PurchaseDocument": 110,
+	"QuantityUnit_code": "PC",
+	"__metadata": {
+		"uri": "PurchaseDocumentItems(PurchaseDocumentItem=1149,PurchaseDocument_PurchaseDocument=8688)",
+		"type": "PurchaseService.PurchaseDocumentItems"
+	},
+	"PurchaseDocument": {
+		"__deferred": {
+			"uri": "PurchaseDocumentItems(PurchaseDocumentItem=1149,PurchaseDocument_PurchaseDocument=8688)/PurchaseDocument"
+		}
+	},
+	"QuantityUnit": {
+		"__deferred": {
+			"uri": "PurchaseDocumentItems(PurchaseDocumentItem=1149,PurchaseDocument_PurchaseDocument=8688)/QuantityUnit"
+		}
+	}
+}, {
+	"QuantityUnit_code": "PC",
+	"PurchaseDocument_PurchaseDocument": 110,
+	"PurchaseDocumentItem": 1,
+	"description": "Company Car",
+	"price": 40000,
+	"currency": "EUR",
+	"quantity": 1
+}, {
+	"PurchaseDocument_PurchaseDocument": 210,
+	"QuantityUnit_code": "PC",
+	"quantity": 1,
+	"description": "Mouse",
+	"price": 50,
+	"currency": "EUR",
+	"PurchaseDocumentItem": 3
+}, {
+	"description": "Keyboard",
+	"PurchaseDocumentItem": 4,
+	"price": 100,
+	"currency": "EUR",
+	"quantity": 1,
+	"PurchaseDocument_PurchaseDocument": 210,
+	"QuantityUnit_code": "PC"
+}, {
+	"PurchaseDocument_PurchaseDocument": 310,
+	"PurchaseDocumentItem": 2,
+	"description": "SAP Press HANA",
+	"price": 50,
+	"currency": "EUR",
+	"quantity": 1,
+	"QuantityUnit_code": "PC"
+}]

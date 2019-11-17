@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Measures.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Measures" Namespace="Org.OData.Measures.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Capabilities.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/cs02/vocabularies/Org.OData.Aggregation.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/462030211/Analytics.xml?api=v2" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Analytics" Namespace="com.sap.vocabularies.Analytics.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470971/Communication.xml?api=v2" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Communication" Namespace="com.sap.vocabularies.Communication.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470968/UI.xml?api=v2" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+  </edmx:Reference>
+  <edmx:DataServices m:DataServiceVersion="2.0">
+    <Schema Namespace="PurchaseService" Alias="PurchaseService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+        <EntitySet Name="PurchaseDocument" EntityType="PurchaseService.PurchaseDocument"/>
+        <EntitySet Name="PurchaseDocumentItems" EntityType="PurchaseService.PurchaseDocumentItems"/>
+        <EntitySet Name="Priorities" EntityType="PurchaseService.Priorities"/>
+        <EntitySet Name="Currencies" EntityType="PurchaseService.Currencies"/>
+        <EntitySet Name="QuantityUnits" EntityType="PurchaseService.QuantityUnits"/>
+        <AssociationSet Name="PurchaseDocument_PurchaseDocPriority" Association="PurchaseService.PurchaseDocument_PurchaseDocPriority">
+          <End Role="PurchaseDocument" EntitySet="PurchaseDocument"/>
+          <End Role="Priorities" EntitySet="Priorities"/>
+        </AssociationSet>
+        <AssociationSet Name="PurchaseDocument_PurchaseDocumentItem" Association="PurchaseService.PurchaseDocument_PurchaseDocumentItem">
+          <End Role="PurchaseDocument" EntitySet="PurchaseDocument"/>
+          <End Role="PurchaseDocumentItems" EntitySet="PurchaseDocumentItems"/>
+        </AssociationSet>
+        <AssociationSet Name="PurchaseDocumentItems_PurchaseDocument" Association="PurchaseService.PurchaseDocumentItems_PurchaseDocument">
+          <End Role="PurchaseDocumentItems" EntitySet="PurchaseDocumentItems"/>
+          <End Role="PurchaseDocument" EntitySet="PurchaseDocument"/>
+        </AssociationSet>
+        <AssociationSet Name="PurchaseDocumentItems_QuantityUnit" Association="PurchaseService.PurchaseDocumentItems_QuantityUnit">
+          <End Role="PurchaseDocumentItems" EntitySet="PurchaseDocumentItems"/>
+          <End Role="QuantityUnits" EntitySet="QuantityUnits"/>
+        </AssociationSet>
+      </EntityContainer>
+      <EntityType Name="PurchaseDocument" Abstract="false" OpenType="false">
+        <Key>
+          <PropertyRef Name="PurchaseDocument"/>
+        </Key>
+        <Property Name="PurchaseDocument" Type="Edm.Int32" Nullable="false"/>
+        <Property Name="description" Type="Edm.String"/>
+        <Property Name="status" Type="Edm.String"/>
+        <Property Name="purchasingOrganization" Type="Edm.String"/>
+        <NavigationProperty Name="PurchaseDocPriority" Relationship="PurchaseService.PurchaseDocument_PurchaseDocPriority" FromRole="PurchaseDocument" ToRole="Priorities"/>
+        <NavigationProperty Name="PurchaseDocumentItem" Relationship="PurchaseService.PurchaseDocument_PurchaseDocumentItem" FromRole="PurchaseDocument" ToRole="PurchaseDocumentItems"/>
+        <Property Name="PurchaseDocPriority_code" Type="Edm.String" MaxLength="1"/>
+      </EntityType>
+      <EntityType Name="PurchaseDocumentItems" Abstract="false" OpenType="false">
+        <Key>
+          <PropertyRef Name="PurchaseDocumentItem"/>
+          <PropertyRef Name="PurchaseDocument_PurchaseDocument"/>
+        </Key>
+        <NavigationProperty Name="PurchaseDocument" Nullable="false" Relationship="PurchaseService.PurchaseDocumentItems_PurchaseDocument" FromRole="PurchaseDocumentItems" ToRole="PurchaseDocument"/>
+        <Property Name="PurchaseDocumentItem" Type="Edm.Int32" Nullable="false"/>
+        <Property Name="description" Type="Edm.String"/>
+        <Property Name="price" Type="Edm.Decimal" Scale="2" Precision="10" Nullable="false"/>
+        <Property Name="currency" Type="Edm.String" MaxLength="3" Nullable="false"/>
+        <Property Name="quantity" Type="Edm.Decimal" Scale="2" Precision="10"/>
+        <NavigationProperty Name="QuantityUnit" Relationship="PurchaseService.PurchaseDocumentItems_QuantityUnit" FromRole="PurchaseDocumentItems" ToRole="QuantityUnits"/>
+        <Property Name="PurchaseDocument_PurchaseDocument" Type="Edm.Int32" Nullable="false"/>
+        <Property Name="QuantityUnit_code" Type="Edm.String" MaxLength="3"/>
+      </EntityType>
+      <EntityType Name="Priorities" Abstract="false" OpenType="false">
+        <Key>
+          <PropertyRef Name="code"/>
+        </Key>
+        <Property Name="code" Type="Edm.String" MaxLength="1" Nullable="false"/>
+        <Property Name="name" Type="Edm.String"/>
+      </EntityType>
+      <EntityType Name="Currencies" Abstract="false" OpenType="false">
+        <Key>
+          <PropertyRef Name="code"/>
+        </Key>
+        <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+        <Property Name="name" Type="Edm.String"/>
+      </EntityType>
+      <EntityType Name="QuantityUnits" Abstract="false" OpenType="false">
+        <Key>
+          <PropertyRef Name="code"/>
+        </Key>
+        <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+        <Property Name="name" Type="Edm.String"/>
+      </EntityType>
+      <Association Name="PurchaseDocument_PurchaseDocPriority">
+        <End Role="PurchaseDocument" Type="PurchaseService.PurchaseDocument" Multiplicity="*"/>
+        <End Role="Priorities" Type="PurchaseService.Priorities" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="Priorities">
+            <PropertyRef Name="code"/>
+          </Principal>
+          <Dependent Role="PurchaseDocument">
+            <PropertyRef Name="PurchaseDocPriority_code"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="PurchaseDocument_PurchaseDocumentItem">
+        <End Role="PurchaseDocument" Type="PurchaseService.PurchaseDocument" Multiplicity="*"/>
+        <End Role="PurchaseDocumentItems" Type="PurchaseService.PurchaseDocumentItems" Multiplicity="*"/>
+        <ReferentialConstraint>
+          <Principal Role="PurchaseDocumentItems">
+            <PropertyRef Name="PurchaseDocument_PurchaseDocument"/>
+          </Principal>
+          <Dependent Role="PurchaseDocument">
+            <PropertyRef Name="PurchaseDocument"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="PurchaseDocumentItems_PurchaseDocument">
+        <End Role="PurchaseDocumentItems" Type="PurchaseService.PurchaseDocumentItems" Multiplicity="*"/>
+        <End Role="PurchaseDocument" Type="PurchaseService.PurchaseDocument" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="PurchaseDocument">
+            <PropertyRef Name="PurchaseDocument"/>
+          </Principal>
+          <Dependent Role="PurchaseDocumentItems">
+            <PropertyRef Name="PurchaseDocument_PurchaseDocument"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="PurchaseDocumentItems_QuantityUnit">
+        <End Role="PurchaseDocumentItems" Type="PurchaseService.PurchaseDocumentItems" Multiplicity="*"/>
+        <End Role="QuantityUnits" Type="PurchaseService.QuantityUnits" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="QuantityUnits">
+            <PropertyRef Name="code"/>
+          </Principal>
+          <Dependent Role="PurchaseDocumentItems">
+            <PropertyRef Name="QuantityUnit_code"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Annotations Target="PurchaseService.PurchaseDocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.SelectionFields">
+          <Collection>
+            <PropertyPath>PurchaseDocument</PropertyPath>
+            <PropertyPath>status</PropertyPath>
+            <PropertyPath>purchasingOrganization</PropertyPath>
+            <PropertyPath>PurchaseDocPriority_code</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="PurchaseDocument"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="description"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="status"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="purchasingOrganization"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="PurchaseDocPriority_code"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.HeaderInfo">
+          <Record Type="UI.HeaderInfoType">
+            <PropertyValue Property="TypeName" String="Purchase Document"/>
+            <PropertyValue Property="TypeNamePlural" String="Purchase Documents"/>
+            <PropertyValue Property="Title">
+              <Record Type="UI.DataField">
+                <PropertyValue Property="Value" Path="PurchaseDocument"/>
+              </Record>
+            </PropertyValue>
+            <PropertyValue Property="Description">
+              <Record Type="UI.DataField">
+                <PropertyValue Property="Value" Path="description"/>
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.HeaderFacets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Label" String="Purchasing Document Details"/>
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralInformation"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.FieldGroup" Qualifier="GeneralInformation">
+          <Record Type="UI.FieldGroupType">
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="Purchase Document Name"/>
+                  <PropertyValue Property="Value" Path="description"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="Priority"/>
+                  <PropertyValue Property="Value" Path="PurchaseDocPriority/name"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="Status"/>
+                  <PropertyValue Property="Value" Path="status"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.Facets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Label" String="Purchase Document Items"/>
+              <PropertyValue Property="Target" AnnotationPath="PurchaseDocumentItem/@UI.LineItem"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+      </Annotations>
+      <Annotations Target="PurchaseService.PurchaseDocument/PurchaseDocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Purchase Document"/>
+      </Annotations>
+      <Annotations Target="PurchaseService.PurchaseDocument/description" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Purchase Document Name"/>
+      </Annotations>
+      <Annotations Target="PurchaseService.PurchaseDocument/status" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Status"/>
+      </Annotations>
+      <Annotations Target="PurchaseService.PurchaseDocument/purchasingOrganization" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Organizational Unit"/>
+      </Annotations>
+      <Annotations Target="PurchaseService.PurchaseDocument/PurchaseDocPriority" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Text" Path="PurchaseDocPriority/name">
+          <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+        </Annotation>
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="Priority"/>
+            <PropertyValue Property="CollectionPath" String="Priorities"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="PurchaseDocPriority_code"/>
+                  <PropertyValue Property="ValueListProperty" String="code"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+        <Annotation Term="Common.Label" String="Priority"/>
+      </Annotations>
+      <Annotations Target="PurchaseService.PurchaseDocument/PurchaseDocPriority_code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Text" Path="PurchaseDocPriority/name">
+          <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+        </Annotation>
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="Priority"/>
+            <PropertyValue Property="CollectionPath" String="Priorities"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="PurchaseDocPriority_code"/>
+                  <PropertyValue Property="ValueListProperty" String="code"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+        <Annotation Term="Common.Label" String="Priority"/>
+      </Annotations>
+      <Annotations Target="PurchaseService.PurchaseDocumentItems" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="PurchaseDocumentItem"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="description"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="price"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="currency"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="quantity"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.HeaderInfo">
+          <Record Type="UI.HeaderInfoType">
+            <PropertyValue Property="TypeName" String="Purchase Document Item"/>
+            <PropertyValue Property="TypeNamePlural" String="Purchase Document Items"/>
+            <PropertyValue Property="Title">
+              <Record Type="UI.DataField">
+                <PropertyValue Property="Value" Path="PurchaseDocumentItem"/>
+              </Record>
+            </PropertyValue>
+            <PropertyValue Property="Description">
+              <Record Type="UI.DataField">
+                <PropertyValue Property="Value" Path="description"/>
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.HeaderFacets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Label" String="Purchasing Document Item Details"/>
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralInformation"/>
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.FieldGroup" Qualifier="GeneralInformation">
+          <Record Type="UI.FieldGroupType">
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="Purchase Document Item Name"/>
+                  <PropertyValue Property="Value" Path="description"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="Quantity"/>
+                  <PropertyValue Property="Value" Path="quantity"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="Price"/>
+                  <PropertyValue Property="Value" Path="price"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="Currency"/>
+                  <PropertyValue Property="Value" Path="currency"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+      </Annotations>
+      <Annotations Target="PurchaseService.PurchaseDocumentItems/price" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Measures.ISOCurrency" Path="currency"/>
+        <Annotation Term="Common.Label" String="Price"/>
+      </Annotations>
+      <Annotations Target="PurchaseService.PurchaseDocumentItems/currency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="Currency"/>
+            <PropertyValue Property="CollectionPath" Path="Currencies"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="currency"/>
+                  <PropertyValue Property="ValueListProperty" String="code"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.Label" String="Currency"/>
+      </Annotations>
+      <Annotations Target="PurchaseService.PurchaseDocumentItems/quantity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Measures.Unit" Path="QuantityUnit_code"/>
+        <Annotation Term="Common.Label" String="Quantity"/>
+      </Annotations>
+      <Annotations Target="PurchaseService.PurchaseDocumentItems/QuantityUnit" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Text" Path="QuantityUnit/name">
+          <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+        </Annotation>
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="Quantity Unit"/>
+            <PropertyValue Property="CollectionPath" String="QuantityUnits"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="QuantityUnit_code"/>
+                  <PropertyValue Property="ValueListProperty" String="code"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+        <Annotation Term="Common.Label" String="Quantity Unit"/>
+      </Annotations>
+      <Annotations Target="PurchaseService.PurchaseDocumentItems/QuantityUnit_code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Text" Path="QuantityUnit/name">
+          <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+        </Annotation>
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="Quantity Unit"/>
+            <PropertyValue Property="CollectionPath" String="QuantityUnits"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="QuantityUnit_code"/>
+                  <PropertyValue Property="ValueListProperty" String="code"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+        <Annotation Term="Common.Label" String="Quantity Unit"/>
+      </Annotations>
+      <Annotations Target="PurchaseService.Priorities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Core.Immutable" Bool="true"/>
+      </Annotations>
+      <Annotations Target="PurchaseService.Priorities/code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Common.Label" String="priority"/>
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="priority"/>
+            <PropertyValue Property="CollectionPath" Path="Priorities"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="code"/>
+                  <PropertyValue Property="ValueListProperty" String="code"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="PurchaseService.Priorities/name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
+      <Annotations Target="PurchaseService.Currencies" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Core.Immutable" Bool="true"/>
+      </Annotations>
+      <Annotations Target="PurchaseService.Currencies/code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Common.Label" String="Currency Code"/>
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="Currency Code"/>
+            <PropertyValue Property="CollectionPath" Path="Currencies"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="code"/>
+                  <PropertyValue Property="ValueListProperty" String="code"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="PurchaseService.Currencies/name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
+      <Annotations Target="PurchaseService.QuantityUnits" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Core.Immutable" Bool="true"/>
+      </Annotations>
+      <Annotations Target="PurchaseService.QuantityUnits/code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Common.Label" String="Quantity Unit Code"/>
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="Quantity Unit Code"/>
+            <PropertyValue Property="CollectionPath" Path="QuantityUnits"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="code"/>
+                  <PropertyValue Property="ValueListProperty" String="code"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="PurchaseService.QuantityUnits/name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
